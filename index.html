@@ -93,17 +93,36 @@
     
     <div class="portfolio">
       <h1>Портфолио</h1>
-      <div class="slider">
-        <button class="slider-btn prev-btn"><img src="./assets/arrow.svg" alt="" class="rotate180"></button>
-        <div class="slider-images">
-          <img src="./assets/content_1.jpeg" alt="" class="slider-img">
-          <img src="./assets/header.jpeg" alt="" class="slider-img">
-          <img src="./assets/content_2.jpeg" alt="" class="slider-img active">
-          <img src="./assets/content_3.jpeg" alt="" class="slider-img">
-          <img src="./assets/header_2.jpg" alt="" class="slider-img">
+      <div class="carousel">
+        <div class="slider">
+          <div class="slide">
+            <img src="./assets/content_1.jpeg" alt="">
+          </div>
+          <div class="slide">
+            <img src="./assets/header.jpeg" alt="">
+          </div>
+          <div class="slide">
+            <img src="./assets/content_2.jpeg" alt="">
+          </div>
+          <div class="slide">
+            <img src="./assets/content_3.jpeg" alt="">
+          </div>
+          <div class="slide">
+            <img src="./assets/header_2.jpg" alt="">
+          </div>
         </div>
-        <button class="slider-btn next-btn"><img src="./assets/arrow.svg" alt=""></button>
+        <div class="carousel-controls">
+          <button class="prev-button">
+            <img src="./assets/arrow.svg" alt="" class="rotate180">
+          </button>
+          <button class="next-button">
+            <img src="./assets/arrow.svg" alt="">
+          </button>
+        </div>
       </div>
+    </div>
+    
+      
 
     <div class="contact-us">
       <h1>Связаться с нами</h1>
@@ -148,33 +167,39 @@
   </body>
 
   <script>
-    const prevButton = document.querySelector('.prev-btn');
-    const nextButton = document.querySelector('.next-btn');
-    const sliderImages = document.querySelectorAll('.slider-img');
-    const numVisibleImages = 3;
-    let currentIndex = 0;
+    // Получаем элементы слайдера и кнопок
+const slider = document.querySelector(".slider");
+const slides = document.querySelectorAll(".slide");
+const prevButton = document.querySelector(".prev-button");
+const nextButton = document.querySelector(".next-button");
 
-    prevButton.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + sliderImages.length) % sliderImages.length;
-      updateSlider();
-    });
+let currentIndex = 0;
+const slideWidth = slides[0].clientWidth;
+const slideCount = slides.length;
 
-    nextButton.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % sliderImages.length;
-      updateSlider();
-    });
+// Перемещение слайдов
+function goToSlide(index) {
+  if (index < 0) {
+    index = slideCount - 3;
+  } else if (index > slideCount - 3) {
+    index = 0;
+  }
+  currentIndex = index;
+  const translateX = -currentIndex * slideWidth;
+  slider.style.transform = `translateX(${translateX}px)`;
+}
 
-    function updateSlider() {
-      sliderImages.forEach((image, index) => {
-        const offset = (index - currentIndex + sliderImages.length) % sliderImages.length;
-        if (offset < numVisibleImages) {
-          image.classList.add('active');
-        } else {
-          image.classList.remove('active');
-        }
-      });
-    }
+// Обработчики событий для кнопок переключения
+prevButton.addEventListener("click", () => {
+  goToSlide(currentIndex - 1);
+});
 
-    updateSlider();
+nextButton.addEventListener("click", () => {
+  goToSlide(currentIndex + 1);
+});
+
+// Начальное положение слайдера
+goToSlide(0);
+
   </script>
 </html>

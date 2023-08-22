@@ -262,73 +262,75 @@ body, html {
   margin-right: 10px;
   fill: #FE390C;
 }
-
+/* Основные стили для карусели */
 .portfolio {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 200px 0;
-  height: 500px;
+  text-align: center;
+  margin: 20px;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px; /* Задайте ширину карусели по вашему желанию */
+  margin: 0 auto;
 }
 
 .slider {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  margin-bottom: 50px;
+  transition: transform 0.3s ease-in-out;
+  margin: 0 -10px; /* Для компенсации margin-right внутри .slide */
 }
 
-.slider-btn {
-  height: 48px;
-  width: 48px;
-  background-color: white;
-  border: 0px;
+.slide {
+  flex: 0 0 calc(100% / 3); /* Три слайда в видимой области */
+  margin-right: 10px;
+  overflow: hidden; /* Скрытие лишних частей изображения */
 }
 
-.slider-btn:hover {
-  cursor: pointer;
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Заполнение всей площади без искажений */
+  transition: transform 0.3s ease-in-out; /* Плавная анимация */
 }
 
-.slider-img {
-  height: 250px;
-  width: 360px;
-  margin: 0px 15px;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.slider-img.active {
-  opacity: 1;
-}
-
-/* Добавьте новый класс для анимации */
-.animate {
-  opacity: 1 !important;
-  transform: translateX(0) !important;
-}
-
-
-.slider-img:not(.active) {
-  display: none;
-}
-
-.slider-images {
+/* Стили для кнопок переключения */
+.carousel-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
 }
 
-.slider-current-section img {
-  width: 20px;
-  height: 20px;
-  margin: 0 5px;
+.prev-button,
+.next-button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
-.slider-current-section img[src*="-active"] {
-  display: inline-block;
+.prev-button {
+  left: 10px; /* Отступ слева */
 }
+
+.next-button {
+  right: 10px; /* Отступ справа */
+}
+
+.prev-button img,
+.next-button img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Дополнительные стили по вашему желанию */
+
+
 
 .contact-us {
   display: flex;
