@@ -8,6 +8,8 @@ body, html {
   height: 100%;
   margin: 0px;
   font-family: 'Geologica', serif;
+  scroll-behavior: smooth; /* Плавный скроллинг */
+
 }
 
 .navbar {
@@ -78,9 +80,9 @@ body, html {
 
 .content {
   align-items: center;
-  padding-top: 100px;
-  padding-left: 50px;
-  font-size: 24px;
+  padding-top: 70px;
+  padding-left: 30px;
+  font-size: 26px;
 }
 
 .about-us {
