@@ -12,13 +12,13 @@
       <nav class="navbar">
         <a href="#header"><img src="assets/logo.svg" alt="логотип"></a>
         <div class="menu-icon">
-          <a href="#"><img src="./assets/telegram_icon.svg" alt="tg"></a>
+          <a href="#"><img src="./assets/menu_icon.svg" alt="tg"></a>
         </div>
         <ul class="navbar-nav">
-          <li class="nav-item"><a href="#">О нас</a></li>
-          <li class="nav-item"><a href="#">Услуги</a></li>
-          <li class="nav-item"><a href="#">Портфолио</a></li>
-          <li class="nav-item"><a href="#">Контакты</a></li>
+          <li class="nav-item"><a href="#about-us">О нас</a></li>
+          <li class="nav-item"><a href="#service">Услуги</a></li>
+          <li class="nav-item"><a href="#portfolio">Портфолио</a></li>
+          <li class="nav-item"><a href="#contact-us">Контакты</a></li>
 
         </ul>
       </nav>
@@ -36,7 +36,7 @@
       <div class="about-content">
         <div class="about-text">
           <h1>О нас</h1>
-          <p>Сделаем ваш дом по-настоящему уютным и теплым! Мы - ваш надежный партнер по утеплению и шумоизоляции в Ростове-на-Дону. Независимо от размеров и сложности проекта, наша команда готова обеспечить высококачественное утепление ваших помещений.</p>
+          <p>Мы специализируемся на создании комфортных и энергоэффективных пространств в зданиях любой сложности. Наш опыт и профессиональный подход позволяют нам предоставлять утепление как снаружи, так и изнутри помещений. Мы понимаем, что каждый проект уникален, поэтому готовы разработать наилучшие решения для ваших потребностей.</p><p>Мы используем передовые материалы, такие как ЭКОВАТА, ЗАДУВНАЯ ВАТА, БАЗАЛЬТОВАЯ ВАТА, ОВЕЧЬЯ ШЕРСТЬ и ПЕНОИЗОЛ, которые гарантируют не только отличную теплоизоляцию, но и полное заполнение даже самых сложных участков.</p>
         </div>
         <div class="about-images">
           <img src="./assets/content_1.jpeg" alt="Фото 1">
@@ -77,8 +77,10 @@
         </div>   
         <div class="card">
           <h2><img src="assets/tool_icon.svg" class="icon">Дополнительные услуги</h2>
-          <p>Демонтаж старого утеплителя.
-          </p>
+          <p>Демонтаж старого утеплителя;</p>
+          <p>Пароизоляция;</p>
+          <p>Ветро- и гидрозащита;</p>
+          <p>Обрештовка перекрытий.</p>
         </div>    
       </div>
     </div>
@@ -132,7 +134,7 @@
         <div class="contact-info">
           <div class="phone-info">
             <p class="subtitle">Phone</p>
-            <p class="string">+7 (123) 456-7890</p>
+            <p class="string">+7 (928) 226-4660</p>
           </div>
           <div class="email-info">
             <p class="subtitle">Email</p>
@@ -155,44 +157,57 @@
     </div>
 
     <footer>
-      <p>Компания XYZ &copy; 2023. Все права защищены.</p>
+      <p>© 2023 ИнженерСтрой Плюс. Все права защищены.</p>
     </footer>
   </body>
 
   <script>
-    // Получаем элементы слайдера и кнопок
-const slider = document.querySelector(".slider");
-const slides = document.querySelectorAll(".slide");
-const prevButton = document.querySelector(".prev-button");
-const nextButton = document.querySelector(".next-button");
-
+  const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+const prevButton = document.querySelector('.prev-button');
+const nextButton = document.querySelector('.next-button');
 let currentIndex = 0;
-const slideWidth = slides[0].clientWidth;
-const slideCount = slides.length;
+let slidesToShow = 3;
 
-// Перемещение слайдов
-function goToSlide(index) {
-  if (index < 0) {
-    index = slideCount - 3;
-  } else if (index > slideCount - 3) {
-    index = 0;
+function updateSliderLayout() {
+  const windowWidth = window.innerWidth;
+  if (windowWidth < 800) {
+    slidesToShow = 2;
+  } else {
+    slidesToShow = 3;
   }
-  currentIndex = index;
-  const translateX = -currentIndex * slideWidth;
-  slider.style.transform = `translateX(${translateX}px)`;
+
+  slides.forEach((slide, index) => {
+    if (index >= currentIndex && index < currentIndex + slidesToShow) {
+      slide.style.display = 'block';
+    } else {
+      slide.style.display = 'none';
+    }
+  });
 }
 
-// Обработчики событий для кнопок переключения
-prevButton.addEventListener("click", () => {
-  goToSlide(currentIndex - 1);
-});
+function navigateSlide(direction) {
+  currentIndex += direction;
+  const totalSlides = slides.length;
+  const maxIndex = totalSlides - slidesToShow;
 
-nextButton.addEventListener("click", () => {
-  goToSlide(currentIndex + 1);
-});
+  if (currentIndex < 0) {
+    currentIndex = maxIndex;
+  } else if (currentIndex > maxIndex) {
+    currentIndex = 0;
+  }
 
-// Начальное положение слайдера
-goToSlide(0);
+  updateSliderLayout();
+}
+
+prevButton.addEventListener('click', () => navigateSlide(-1));
+nextButton.addEventListener('click', () => navigateSlide(1));
+
+window.addEventListener('resize', updateSliderLayout);
+updateSliderLayout();
+
+
+
 
 
 const menuIcon = document.querySelector('.menu-icon');
@@ -219,6 +234,9 @@ window.addEventListener('scroll', () => {
     navbar.classList.remove('active');
   }
 });
+
+
+
 
 
   </script>
